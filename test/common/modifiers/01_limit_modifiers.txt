@@ -1,0 +1,124 @@
+﻿ai_aggressiveness_vlow = { #Probably prevents war in most of the world...
+	ai_war_chance = -0.5
+	ai_war_cooldown = 0.5
+}
+
+ai_aggressiveness_low = { #Effectively makes every faith 'pacifist'
+	ai_war_chance = -0.25
+	ai_war_cooldown = 0.25
+}
+
+ai_aggressiveness_high = {
+	ai_war_chance = 0.25
+	ai_war_cooldown = -0.25
+}
+
+ai_aggressiveness_vhigh = {
+	ai_war_chance = 0.5
+	ai_war_cooldown = -0.5
+}
+
+ai_aggressiveness_extreme = {
+	ai_war_chance = 10.0
+	ai_war_cooldown = -10.0
+}
+
+domain_limit_vlow = {
+	domain_limit = -4
+}
+
+domain_limit_low = {
+	domain_limit = -2
+}
+
+domain_limit_high = {
+	domain_limit = 2
+}
+
+domain_limit_vhigh = {
+	domain_limit = 4
+}
+
+domain_limit_extreme = {
+	domain_limit = 10000
+}
+
+vassal_limit_vlow = {
+	vassal_limit = -10
+}
+
+vassal_limit_low = {
+	vassal_limit = -5
+}
+
+vassal_limit_high = {
+	vassal_limit = 10
+}
+
+vassal_limit_vhigh = {
+	vassal_limit = 20
+}
+
+vassal_limit_extreme = {
+	vassal_limit = 1000
+}
+
+knight_limit_vlow = {
+	knight_limit = -3
+}
+
+knight_limit_low = {
+	knight_limit = -2
+}
+
+knight_limit_high = {
+	knight_limit = 2
+}
+
+knight_limit_vhigh = {
+	knight_limit = 5
+}
+
+knight_limit_extreme = {
+	knight_limit = 100
+}
+
+maa_limit_vlow = {
+	men_at_arms_limit =  -2
+}
+
+maa_limit_low = {
+	men_at_arms_limit =  -1
+}
+
+maa_limit_high = {
+	men_at_arms_limit =  2
+}
+
+maa_limit_vhigh = {
+	men_at_arms_limit =  4
+}
+
+maa_limit_extreme = {
+	men_at_arms_limit =  100
+}
+
+maa_cap_vlow = {
+	men_at_arms_cap =  -2
+}
+
+maa_cap_low = {
+	men_at_arms_cap =  -1
+}
+
+maa_cap_high = {
+	men_at_arms_cap =  1
+}
+
+maa_cap_vhigh = {
+	men_at_arms_cap =  3
+}
+
+maa_cap_extreme = {
+	men_at_arms_cap =  100
+}

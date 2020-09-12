@@ -1,0 +1,453 @@
+﻿gamerule_dejure_empires = {
+	default = default_empires
+	default_empires = {
+
+	}
+	historical_empires = {
+
+	}
+	no_dejure_empires = {
+	}
+}
+
+cadet_branches = {
+	default = default_cadet
+
+	default_cadet = {
+	}
+
+	hard_cadet = {
+	}
+
+	no_cadet = {
+	}
+}
+
+matrilineal_marriage = {
+	default = default_matri
+
+	default_matri = {
+
+	}
+
+	limited_matri = {
+
+	}
+
+	restricted_matri = {
+
+	}
+
+	more_restricted_matri = {
+
+	}
+
+	never_matri = {
+
+	}
+}
+
+secret_bastards = {
+	default = default_secret_bastards
+	
+	default_secret_bastards = {
+	}
+	
+	reveal_secret_bastards = {
+	}
+	
+	no_secret_bastards = {
+	
+	}
+}
+
+fake_news = {
+	default = fake_news_on
+	
+	fake_news_on = {
+	}
+
+	fake_news_limited = {
+	}
+	
+	fake_news_off = {
+	}
+}
+
+shattered_realms = {
+	default = no_shattered_realms
+
+	no_shattered_realms = { 
+
+	}
+	count_shattered_realms = {
+		flag = blocks_achievements
+	}
+	duke_shattered_realms = {
+		flag = blocks_achievements	
+	}
+	king_shattered_realms = {
+		flag = blocks_achievements
+	}
+	emperor_shattered_realms = {
+		flag = blocks_achievements
+	}
+}
+
+shattered_realms_landless = {
+	default = disabled_shattered_realms_landless
+
+	disabled_shattered_realms_landless = { 
+
+	}
+	enabled_shattered_realms_landless = { 
+
+	}
+}
+
+#random_realms = {
+#	default = no_random_realms
+#	no_random_realms = { 
+#
+#	}
+#	yes_random_realms = {
+#		flag = blocks_achievements
+#	}
+#}
+
+starting_governments = {
+	default = default_starting_governments
+
+	default_starting_governments = { 
+
+	}
+#	random_starting_governments = { 
+#		flag = blocks_achievements
+#	}	
+	random_ft_starting_governments = { 
+		flag = blocks_achievements
+	}	
+	feudal_starting_governments = { 
+		flag = blocks_achievements
+	}	
+	tribal_starting_governments = { 
+		flag = blocks_achievements
+	}
+}
+
+ai_seduction = {
+	default = default_seduction
+	default_seduction = {
+
+	}
+
+	less_seduction = {
+
+	}
+	
+	restricted_seduction = {
+
+	}
+	
+	no_seduction = {
+
+	}
+}
+
+ai_intrigue = {
+	default = default_intrigue
+	default_intrigue = {
+
+	}
+
+	less_intrigue = {
+
+	}
+	
+	restricted_intrigue = {
+	}
+	
+	no_intrigue = {
+		flag = blocks_achievements
+	}
+}
+
+
+gamerule_ai_aggressiveness = {
+	default = default_ai_aggressiveness
+	
+	vlow_ai_aggressiveness = {
+		flag = blocks_achievements
+	}
+	low_ai_aggressiveness = {
+	}
+	default_ai_aggressiveness = {
+	}
+	high_ai_aggressiveness = {
+	}
+	vhigh_ai_aggressiveness = {
+		flag = blocks_achievements
+	}	
+	extreme_ai_aggressiveness = {
+		flag = blocks_achievements	
+	}
+}
+
+holy_war_cbs = {
+	default = holy_war_cb_default
+	holy_war_cb_default = {
+	}
+	
+	holy_war_cb_3 = {
+	}
+	
+	holy_war_cb_5 = {	
+	}
+	
+	holy_war_cb_10 = {
+	}
+	
+	holy_war_cb_20 = {
+	}
+}
+
+conquest_war_cbs = {
+	default = conquest_war_cb_default
+	conquest_war_cb_default = {
+	}
+	
+	conquest_war_cb_3 = {
+	}
+	
+	conquest_war_cb_5 = {	
+	}
+	
+	conquest_war_cb_10 = {
+	}
+	
+	conquest_war_cb_20 = {
+	}
+}
+
+confed_partition = {
+	default = default_confed_partition
+	
+	default_confed_partition = {
+	}
+	confed_partition_shatter = {
+	}
+	confed_partition_release = {
+	}
+	confed_partition_combo = {
+	}
+}
+
+pagan_reformation = {
+	default = default_pagan_reformation
+	default_pagan_reformation = {
+	
+	}
+
+	no_pagan_reformation = {
+	
+	}
+}
+
+pagan_reformation_hs = {
+	default = pagan_reformation_hs_3
+	pagan_reformation_hs_0 = {
+		flag = blocks_achievements
+	}
+	pagan_reformation_hs_1 = {
+		flag = blocks_achievements	
+	}
+	pagan_reformation_hs_2 = {
+		flag = blocks_achievements	
+	}
+	pagan_reformation_hs_3 = {
+	
+	}
+	pagan_reformation_hs_4 = {
+	
+	}
+	pagan_reformation_hs_5 = {
+	
+	}
+}
+
+heresy_creation = {
+	default = default_heresy_creation
+	default_heresy_creation = {
+	
+	}
+	
+	no_heresy_creation = {
+	
+	}
+}
+
+gamerule_domain_limit = {
+	default = default_domain_limit
+	
+	vlow_domain_limit = {
+	}
+	vlow_domain_limit_pl = {
+	}
+	low_domain_limit = {
+	}
+	low_domain_limit_pl = {
+	}
+	default_domain_limit = {
+	}
+	high_domain_limit = {
+		flag = blocks_achievements
+	}
+	high_domain_limit_pl = {
+		flag = blocks_achievements
+	}
+	vhigh_domain_limit = {
+		flag = blocks_achievements
+	}	
+	vhigh_domain_limit_pl = {
+		flag = blocks_achievements
+	}	
+	extreme_domain_limit = {
+		flag = blocks_achievements	
+	}
+	extreme_domain_limit_pl = {
+		flag = blocks_achievements	
+	}
+}
+
+gamerule_vassal_limit = {
+	default = default_vassal_limit
+	
+	vlow_vassal_limit = {
+	}
+	vlow_vassal_limit_pl = {
+	}
+	low_vassal_limit = {
+	}
+	low_vassal_limit_pl = {
+	}
+	default_vassal_limit = {
+	}
+	high_vassal_limit = {
+		flag = blocks_achievements
+	}
+	high_vassal_limit_pl = {
+		flag = blocks_achievements
+	}
+	vhigh_vassal_limit = {
+		flag = blocks_achievements
+	}	
+	vhigh_vassal_limit_pl = {
+		flag = blocks_achievements
+	}	
+	extreme_vassal_limit = {
+		flag = blocks_achievements	
+	}
+	extreme_vassal_limit_pl = {
+		flag = blocks_achievements	
+	}
+}
+
+gamerule_knight_limit = {
+	default = default_knight_limit
+	
+	vlow_knight_limit = {
+	}
+	vlow_knight_limit_pl = {
+	}
+	low_knight_limit = {
+	}
+	low_knight_limit_pl = {
+	}
+	default_knight_limit = {
+	}
+	high_knight_limit = {
+		flag = blocks_achievements
+	}
+	high_knight_limit_pl = {
+		flag = blocks_achievements
+	}
+	vhigh_knight_limit = {
+		flag = blocks_achievements
+	}	
+	vhigh_knight_limit_pl = {
+		flag = blocks_achievements
+	}	
+	extreme_knight_limit = {
+		flag = blocks_achievements	
+	}
+	extreme_knight_limit_pl = {
+		flag = blocks_achievements	
+	}
+}
+
+gamerule_maa_limit = {
+	default = default_maa_limit
+	
+	vlow_maa_limit = {
+	}
+	vlow_maa_limit_pl = {
+	}
+	low_maa_limit = {
+	}
+	low_maa_limit_pl = {
+	}
+	default_maa_limit = {
+	}
+	high_maa_limit = {
+		flag = blocks_achievements
+	}
+	high_maa_limit_pl = {
+		flag = blocks_achievements
+	}
+	vhigh_maa_limit = {
+		flag = blocks_achievements
+	}	
+	vhigh_maa_limit_pl = {
+		flag = blocks_achievements
+	}	
+	extreme_maa_limit = {
+		flag = blocks_achievements	
+	}
+	extreme_maa_limit_pl = {
+		flag = blocks_achievements	
+	}
+}
+
+gamerule_maa_cap = {
+	default = default_maa_cap
+	
+	vlow_maa_cap = {
+	}
+	vlow_maa_cap_pl = {
+	}
+	low_maa_cap = {
+	}
+	low_maa_cap_pl = {
+	}
+	default_maa_cap = {
+	}
+	high_maa_cap = {
+		flag = blocks_achievements
+	}
+	high_maa_cap_pl = {
+		flag = blocks_achievements
+	}
+	vhigh_maa_cap = {
+		flag = blocks_achievements
+	}	
+	vhigh_maa_cap_pl = {
+		flag = blocks_achievements
+	}	
+	extreme_maa_cap = {
+		flag = blocks_achievements	
+	}
+	extreme_maa_cap_pl = {
+		flag = blocks_achievements	
+	}
+}
+

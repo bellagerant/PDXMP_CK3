@@ -1,0 +1,20 @@
+﻿#Rules that are not yet fully implemented
+
+special_title_creation = { #Titles created by decision
+	default = default_special_titles
+
+	default_special_titles = {
+	}
+
+	default_special_titles_pl = {
+	}
+
+	titular_special_titles = {
+	}
+
+	titular_special_titles_pl = {
+	}
+
+	no_special_titles = {	
+	}
+}

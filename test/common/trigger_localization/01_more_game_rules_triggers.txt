@@ -1,0 +1,13 @@
+﻿no_pagan_reformation = {
+	global_not = NO_PAGAN_REFORMATION_RULE
+	global = NO_PAGAN_REFORMATION_RULE
+}
+
+no_heresy_creation = {
+	global_not = NO_HERESY_CREATION_RULE
+	global = NO_HERESY_CREATION_RULE
+}
+
+GAME_RULE_MATRI_MARRIAGE_ALLOWED = {
+	global = GAME_RULE_MATRI_MARRIAGE_ALLOWED_DESC
+}

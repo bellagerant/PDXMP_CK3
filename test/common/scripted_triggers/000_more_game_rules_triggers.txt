@@ -1,0 +1,95 @@
+#Matri Marriage#
+
+matri_marriage_allowed = {
+	custom_description = {
+		text = GAME_RULE_MATRI_MARRIAGE_ALLOWED
+		OR = {
+			has_game_rule = default_matri
+			has_game_rule = limited_matri
+			AND = {
+				has_game_rule = restricted_matri
+				faith = {
+					OR = {
+						has_doctrine = doctrine_gender_equal
+						has_doctrine = doctrine_gender_female_dominated
+					}
+				}
+			}
+			AND = {
+				has_game_rule = more_restricted_matri
+				faith = { has_doctrine = doctrine_gender_female_dominated }
+			}
+		}
+	}
+}
+
+#When root is top liege
+is_de_jure_vassal_of_ROOT_top_liege_trigger = {
+	any_held_title = {
+		limit = { tier = prev.highest_held_title_tier }
+		OR = {	
+			de_jure_liege = {
+				exists = holder
+				holder = root
+			}
+			trigger_if = {
+				limit = {
+					tier = tier_duchy
+				}
+				de_jure_liege = { #king
+					de_jure_liege = { #emperor
+						exists = holder
+						holder = root
+					}
+				}
+			}
+			trigger_if = {
+				limit = {
+					tier = tier_county
+				}
+				de_jure_liege = { #duke
+					de_jure_liege = { #king
+						OR = {
+							AND = {
+								exists = holder
+								holder = root
+							}
+							de_jure_liege = { #emperor
+								exists = holder
+								holder = root
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+is_protected_hre_vassal = {
+	#save_temporary_scope_as = checked_vassal
+	OR = {
+		title:e_france = {
+			any_de_jure_vassal_or_below = {
+				this = prevprev.primary_title
+			}
+		}
+
+		title:e_italy = {
+			any_de_jure_vassal_or_below = {
+				this = prevprev.primary_title
+			}
+		}
+	}
+}
+
+mgr_is_historical_empire = {
+	OR = {
+		this = title:e_hre
+		this = title:e_byzantium
+		this = title:e_persia
+		#historical, for possible compatibility with other mods
+		this = title:e_roman_empire
+		#others, possibly: tibet and india (sp. northern part) are possible contenders here as well. Arguably also Arabia
+	}
+}

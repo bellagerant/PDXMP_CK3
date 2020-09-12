@@ -1,0 +1,16 @@
+﻿namespace = mgr
+
+mgr.1 = { # Reveal secret bastard's real father
+	hidden = yes
+	trigger = {
+		has_game_rule = reveal_secret_bastards
+		exists = real_father
+		OR = {
+			NOT = { father = real_father }
+			NOT = { exists = father }
+		}
+	}
+	immediate = {
+		mgr_reveal_secret_bastard_effect = yes
+	}
+}

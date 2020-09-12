@@ -1,0 +1,1414 @@
+﻿########################
+# MATRILINEAL MARRIAGE #
+########################
+
+marry_matrilineal_if_possible = {
+	#Designed to replace the hardcoded 'marry_matrilineal' in events, decisions, and other scripted effects
+	#Use marry_matrilineal_if_possible = { CHARACTER = $TARGET$ }
+	#Root is expected to be the female character to be married
+	$CHARACTER$ = {
+		if = {
+			limit = {
+				OR = {
+					has_game_rule = default_matri
+					AND = {
+						has_game_rule = restricted_matri
+						faith = {
+							OR = {
+								has_doctrine = doctrine_gender_equal
+								has_doctrine = doctrine_gender_female_dominated
+							}
+						}
+					}
+					AND = {
+						has_game_rule = more_restricted_matri
+						faith = {
+							has_doctrine = doctrine_gender_female_dominated
+						}
+					}
+				}
+			}
+			marry = root
+		}
+		else = {
+			marry_matrilineal = root
+		}
+	}
+}
+
+marry_matrilineal_if_possible_PREV = {
+	$CHARACTER$ = {
+		if = {
+			limit = {
+				OR = {
+					has_game_rule = default_matri
+					AND = {
+						has_game_rule = restricted_matri
+						faith = {
+							OR = {
+								has_doctrine = doctrine_gender_equal
+								has_doctrine = doctrine_gender_female_dominated
+							}
+						}
+					}
+					AND = {
+						has_game_rule = more_restricted_matri
+						faith = {
+							has_doctrine = doctrine_gender_female_dominated
+						}
+					}
+				}
+			}
+			marry = prev
+		}
+		else = {
+			marry_matrilineal = prev
+		}
+	}
+}
+
+###################
+# SECRET BASTARDS #
+###################
+
+mgr_reveal_secret_bastard_effect = {
+	add_bastard_trait_based_on_faith_effect = yes
+	set_father = scope:real_father
+	set_parent_house_effect = yes
+	if = {
+		limit = { 
+			mother = { 
+				any_secret = {
+					secret_type = secret_disputed_heritage
+					secret_target = {
+						this = root
+					}
+				}
+			}
+		}
+		mother = {
+			every_secret = {
+				limit = {
+					secret_type = secret_disputed_heritage
+					secret_target = {
+						this = root
+					}
+				}
+				expose_secret = root
+			}
+		}
+	}
+}
+
+###############################
+# DOMAIN/VASSAL/KNIGHT LIMITS #
+###############################
+
+apply_limit_modifiers_effect = {		
+	#AI Aggressiveness
+	if = {
+		limit = { 
+			has_game_rule = vlow_ai_aggressiveness 
+		}
+		add_character_modifier = {
+			modifier = ai_aggressiveness_vlow
+		}
+	}		
+	else_if = {
+		limit = { 
+			has_game_rule = low_ai_aggressiveness 
+		}
+		add_character_modifier = {
+			modifier = ai_aggressiveness_low
+		}
+	}		
+	else_if = {
+		limit = { 
+			has_game_rule = high_ai_aggressiveness
+		}
+		add_character_modifier = {
+			modifier = ai_aggressiveness_high
+		}
+	}
+	else_if = {
+		limit = { 
+			has_game_rule = vhigh_ai_aggressiveness 
+		}
+		add_character_modifier = {
+			modifier = ai_aggressiveness_vhigh
+		}
+	}
+	else_if = {
+		limit = { 
+			has_game_rule = extreme_ai_aggressiveness 
+		}
+		add_character_modifier = {
+			modifier = ai_aggressiveness_extreme
+		}
+	}		
+	#Domain
+	if = {
+		limit = { 
+			OR = {
+				has_game_rule = vlow_domain_limit 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+					has_game_rule = vlow_domain_limit_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = domain_limit_vlow
+		}
+	}		
+	else_if = {
+		limit = { 
+			OR = {
+				has_game_rule = low_domain_limit 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+					has_game_rule = low_domain_limit_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = domain_limit_low
+		}
+	}		
+	else_if = {
+		limit = { 
+			OR = {
+				has_game_rule = high_domain_limit 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+					has_game_rule = high_domain_limit_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = domain_limit_high
+		}
+	}
+	else_if = {
+		limit = { 
+			OR = {
+				has_game_rule = vhigh_domain_limit 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+					has_game_rule = vhigh_domain_limit_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = domain_limit_vhigh
+		}
+	}
+	else_if = {
+		limit = { 
+			OR = {
+				has_game_rule = extreme_domain_limit 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+					has_game_rule = extreme_domain_limit_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = domain_limit_extreme
+		}
+	}
+	#Vassal
+	if = {
+		limit = { 
+			OR = {
+				has_game_rule = vlow_vassal_limit 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+					has_game_rule = vlow_vassal_limit_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = vassal_limit_vlow
+		}
+	}		
+	else_if = {
+		limit = { 
+			OR = {
+				has_game_rule = low_vassal_limit 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+					has_game_rule = low_vassal_limit_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = vassal_limit_low
+		}
+	}		
+	else_if = {
+		limit = { 
+			OR = {
+				has_game_rule = high_vassal_limit 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+					has_game_rule = high_vassal_limit_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = vassal_limit_high
+		}
+	}
+	else_if = {
+		limit = { 
+			OR = {
+				has_game_rule = vhigh_vassal_limit 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+					has_game_rule = vhigh_vassal_limit_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = vassal_limit_vhigh
+		}
+	}
+	else_if = {
+		limit = { 
+			OR = {
+				has_game_rule = extreme_vassal_limit 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+					has_game_rule = extreme_vassal_limit_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = vassal_limit_extreme
+		}
+	}
+
+	#Knight
+	if = {
+		limit = { 
+			OR = {
+				has_game_rule = vlow_knight_limit 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+					has_game_rule = vlow_knight_limit_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = knight_limit_vlow
+		}
+	}		
+	else_if = {
+		limit = { 
+			OR = {
+				has_game_rule = low_knight_limit 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+					has_game_rule = low_knight_limit_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = knight_limit_low
+		}
+	}		
+	else_if = {
+		limit = { 
+			OR = {
+				has_game_rule = high_knight_limit 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+					has_game_rule = high_knight_limit_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = knight_limit_high
+		}
+	}
+	else_if = {
+		limit = { 
+			OR = {
+				has_game_rule = vhigh_knight_limit 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+					has_game_rule = vhigh_knight_limit_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = knight_limit_vhigh
+		}
+	}
+	else_if = {
+		limit = { 
+			OR = {
+				has_game_rule = extreme_knight_limit 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+					has_game_rule = extreme_knight_limit_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = knight_limit_extreme
+		}
+	}
+	#Men-At-Arms - Limit
+	if = {
+		limit = { 
+			OR = {
+				has_game_rule = vlow_maa_limit 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+
+					has_game_rule = vlow_maa_limit_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = maa_limit_vlow
+		}
+	}		
+	else_if = {
+		limit = { 
+			OR = {
+				has_game_rule = low_maa_limit 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+
+					has_game_rule = low_maa_limit_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = maa_limit_low
+		}
+	}		
+	else_if = {
+		limit = { 
+			OR = {
+				has_game_rule = high_maa_limit 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+
+					has_game_rule = high_maa_limit_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = maa_limit_high
+		}
+	}
+	else_if = {
+		limit = { 
+			OR = {
+				has_game_rule = vhigh_maa_limit 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+
+					has_game_rule = vhigh_maa_limit_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = maa_limit_vhigh
+		}
+	}
+	else_if = {
+		limit = { 
+			OR = {
+				has_game_rule = extreme_maa_limit 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+
+					has_game_rule = extreme_maa_limit_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = maa_limit_extreme
+		}
+	}
+
+	#Men-At-Arms - Cap
+	if = {
+		limit = { 
+			OR = {
+				has_game_rule = vlow_maa_cap 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+
+					has_game_rule = vlow_maa_cap_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = maa_cap_vlow
+		}
+	}		
+	else_if = {
+		limit = { 
+			OR = {
+				has_game_rule = low_maa_cap 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+
+					has_game_rule = low_maa_cap_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = maa_cap_low
+		}
+	}		
+	else_if = {
+		limit = { 
+			OR = {
+				has_game_rule = high_maa_cap 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+
+					has_game_rule = high_maa_cap_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = maa_cap_high
+		}
+	}
+	else_if = {
+		limit = { 
+			OR = {
+				has_game_rule = vhigh_maa_cap 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+
+					has_game_rule = vhigh_maa_cap_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = maa_cap_vhigh
+		}
+	}
+	else_if = {
+		limit = { 
+			OR = {
+				has_game_rule = extreme_maa_cap 
+				AND = {
+					OR = {
+						any_player = { this = prev } #Hacky MP workaround
+						has_character_flag = mgr_force_limit_modifiers
+					}
+					has_game_rule = extreme_maa_cap_pl
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = maa_cap_extreme
+		}
+	}
+}
+
+########
+# WARS #
+########
+
+holy_war_cb_cooldown_effect = {
+	if = {
+		limit = { has_game_rule = holy_war_cb_3 }
+		add_character_modifier = {
+			modifier = mgr_recent_holy_war
+			years = 3
+		}
+	}
+	else_if = {
+		limit = { has_game_rule = holy_war_cb_5 }
+		add_character_modifier = {
+			modifier = mgr_recent_holy_war
+			years = 5
+		}
+	}
+	else_if = {
+		limit = { has_game_rule = holy_war_cb_10 }
+		add_character_modifier = {
+			modifier = mgr_recent_holy_war
+			years = 10
+		}
+	}
+	else_if = {
+		limit = { has_game_rule = holy_war_cb_20 }
+		add_character_modifier = {
+			modifier = mgr_recent_holy_war
+			years = 20
+		}
+	}
+}
+
+conquest_war_cb_cooldown_effect = {
+	if = {
+		limit = { has_game_rule = conquest_war_cb_3 }
+		add_character_modifier = {
+			modifier = mgr_recent_conquest_war
+			years = 3
+		}
+	}
+	else_if = {
+		limit = { has_game_rule = conquest_war_cb_5 }
+		add_character_modifier = {
+			modifier = mgr_recent_conquest_war
+			years = 5
+		}
+	}
+	else_if = {
+		limit = { has_game_rule = conquest_war_cb_10 }
+		add_character_modifier = {
+			modifier = mgr_recent_conquest_war
+			years = 10
+		}
+	}
+	else_if = {
+		limit = { has_game_rule = conquest_war_cb_20 }
+		add_character_modifier = {
+			modifier = mgr_recent_conquest_war
+			years = 20
+		}
+	}
+}
+
+#########################
+# CONFEDERATE PARTITION #
+#########################
+
+confed_partition_succ_shatter_effect = {
+	#Destroy empire titles after heir receives it.
+	if = {
+		limit = {
+			OR = {
+				has_game_rule = confed_partition_shatter 
+				has_game_rule = confed_partition_combo
+			}
+			NOT = { father = { this = character:3040 } } #Alp Arslan's empire survived for one more generation... and this helps slow the big purple blob a little!
+			#Not if we've reformed to elective succession
+			NOT = {
+				primary_title = {
+					OR = {
+						has_title_law_flag = advanced_succession_law
+						has_title_law_flag = elective_succession_law
+					}
+				}
+			}
+			any_held_title = { 
+				tier = tier_empire 
+				NOT = { this = title:e_mongol_empire } #Already handled elsewhere...
+				NOT = { this = title:e_byzantium } #Avoid collapse in 867 start
+				OR = { #HRE must be sanctioned by the pope unless it's reformed to a different succession law - or maybe change to Germany in this case? but that should be handled elsewhere...
+					NOT = { this = title:e_hre }
+					NOT = { root.faith = faith:catholic } 
+				}
+			}
+		}
+		every_held_title = {
+			limit = { 
+				tier = tier_empire 
+				NOT = { this = title:e_mongol_empire } 
+				NOT = { this = title:e_byzantium }
+				OR = { 
+					NOT = { this = title:e_hre }
+					NOT = { root.faith = faith:catholic } 
+				}
+			}
+			root = { 
+				destroy_title = prev 
+				add_pressed_claim = prev
+			}
+		}
+	}
+}
+confed_partition_succ_vassal_effect = {
+	#Release any vassals if primary title is not de jure - better as an event?
+	if = {
+		limit = {
+			OR = {
+				has_game_rule = confed_partition_release
+				has_game_rule = confed_partition_combo
+			}
+			NOT = { father = { this = character:3040 } } #See above
+			#Not if we've reformed to elective succession
+			NOT = {
+				primary_title = {
+					OR = {
+						has_title_law_flag = advanced_succession_law
+						has_title_law_flag = elective_succession_law
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				is_independent_ruler = yes 
+			}
+			every_vassal = {
+				limit = {
+					#NOT = { root = { has_de_jure_claim_on = prev } }
+					is_de_jure_vassal_of_ROOT_top_liege_trigger = no
+					
+					OR = {
+						NOT = { root = { any_held_title = { this = title:e_hre } } }
+						is_protected_hre_vassal = no
+					}
+				}
+				every_held_title = {
+					root.player_heir = { add_unpressed_claim = prev }
+				}
+				create_title_and_vassal_change = change
+				scope:change = {
+					set_title_and_vassal_change_type = independency
+				}
+				becomes_independent = {
+					change = scope:change
+				}
+				resolve_title_and_vassal_change = scope:change
+			}
+		}
+		else = {
+			every_vassal = {
+				limit = {
+					#NOT = { root = { has_de_jure_claim_on = prev } }
+					is_de_jure_vassal_of_ROOT_top_liege_trigger = no
+				}
+				every_held_title = {
+					root.player_heir = { add_unpressed_claim = prev }
+				}
+				create_title_and_vassal_change = title_change
+				change_liege = {
+					liege = root.liege
+					change = scope:title_change
+				}
+				resolve_title_and_vassal_change = scope:title_change
+			}
+		}
+	}
+}
+####################
+# DE JURE EMPIRES  #
+####################
+
+mgr_empires_effect = {
+	#hacky way to get all the empires, instead of having to do it all directly
+	every_independent_ruler = { #test
+		#limit = { is_independent_ruler = yes }
+		every_realm_de_jure_empire = {
+			limit = { 
+				OR = {
+					mgr_is_historical_empire = no 
+					has_game_rule = no_dejure_empires
+				}
+			}
+			every_in_de_jure_hierarchy = {
+				limit = {
+					tier = tier_kingdom
+				}
+				set_de_jure_liege_title = title:e_null_empire #sadly setting this to 0, none, etc. doesn't work.
+			}
+		}
+	}
+	#Expand de jure HRE after Otto I is Emperor
+	if = {
+		limit = { 
+			year >= 962 
+			has_game_rule = historical_empires
+		}
+		title:k_italy = { set_de_jure_liege_title = title:e_hre }
+		title:k_romagna = { set_de_jure_liege_title = title:e_hre }
+		title:k_burgundy = { set_de_jure_liege_title = title:e_hre }
+	}
+}
+
+
+####################
+# SHATTERED REALMS #
+####################
+
+mgr_de_jure_vassalize_effect = { #Intended for duke vs counts, use on duke scope
+	#save_scope_as = i_ruler
+	primary_title = {
+		every_dejure_vassal_title_holder = {
+			limit = { highest_held_title_tier = tier_county }
+			create_title_and_vassal_change = change
+			change_liege = {
+				liege = scope:i_ruler
+				change = scope:change
+			}
+			resolve_title_and_vassal_change = scope:change
+		}
+	}
+}
+
+mgr_indie_workaround = { #Workaround for problematic duchies - has to be done manually...
+	every_in_list = {
+		list = possible_problem_duchies
+		save_scope_as = i_title
+		if = {
+			limit = { NOT = { exists = holder } }
+			random_de_jure_county_holder = {
+				save_scope_as = i_ruler
+				create_title_and_vassal_change = change
+				scope:change = {
+					set_title_and_vassal_change_type = created
+				}
+				scope:i_title = {
+					change_title_holder = {
+						holder = scope:i_ruler
+						change = scope:change
+					}
+				}
+				resolve_title_and_vassal_change = scope:change
+				mgr_de_jure_vassalize_effect = yes
+			}
+		}
+	}
+}
+
+mgr_shattered_realms_effect = {
+	if = {
+		limit = { NOT = { has_game_rule = no_shattered_realms } }
+		#hacky attempt to try and remove special troops until Paradox reveals/creates a command for disbanding armies...
+		#Might be better to deal with this directly in the history files, but would make this mod even less compatible with overhauls
+		every_ruler = {
+			limit = {
+				OR = {
+					this = character:6878 #Hæsteinn of Nantes
+					this = character:163111 #Ivar the Boneless
+					this = character:163112 #Halfdan
+					this = character:122 #Harald Godwineson
+					this = character:189029 #Kitti
+					this = character:3040 #Alp Arslan
+					this = character:248748 #Hummay
+					this = character:140 #William
+					this = character:102531  #Harald Hardrada
+				}
+				is_ai = yes #Player would get a game over automatically otherwise
+			}
+			save_scope_as = go_away_please
+			#First, try just getting rid of all their titles. Note: It appears to have done the trick.
+			random_neighboring_top_liege_realm_owner = { #If we don't give it to an existing ruler the game does not recognize the new holder for the next part
+				limit = {
+					#OR = {
+					#	faith = go_away_please.faith #To at least keep the area thematically similar
+					#	culture = go_away_please.culture
+					#}
+					NOR = {
+						OR = {
+							this = character:6878 #Hæsteinn
+							this = character:163111 #Ivar the Boneless
+							this = character:163112 #Halfdan
+							this = character:122 #Harald Godwineson
+							this = character:189029 #Kitti
+							this = character:3040 #Alp Arslan
+							this = character:248748 #Hummay
+							this = character:140 #William
+							this = character:102531  #Harald Hardrada
+						}
+						this = go_away_please.player_heir
+					}
+				}
+				save_scope_as = lucky_new_ruler
+				scope:go_away_please = {
+					create_title_and_vassal_change = change
+					scope:change = {
+						set_title_and_vassal_change_type = created
+					}
+					every_held_title = {
+						change_title_holder = {
+							holder = scope:lucky_new_ruler
+							change = scope:change
+						}
+					}
+					resolve_title_and_vassal_change = scope:change
+				}				
+			}
+		}
+		#Begin shattering realms
+		every_ruler = {
+			save_scope_as = i_ruler
+			#Keep important characters important
+			if = {
+				limit = { 
+					highest_held_title_tier = tier_empire
+				}
+				add_character_flag = preferred_emperor
+			}
+			if = {
+				limit = { 
+					highest_held_title_tier >= tier_kingdom
+				}
+				add_character_flag = preferred_king
+			}
+			if = {
+				limit = { 
+					highest_held_title_tier >= tier_duchy 
+				}
+				add_character_flag = preferred_duke
+			}
+			#Release vassals
+			every_vassal = {
+				limit = {
+					highest_held_title_tier >= tier_county
+				}
+				create_title_and_vassal_change = change
+				scope:change = {
+					set_title_and_vassal_change_type = independency
+				}
+				becomes_independent = {
+					change = scope:change
+				}
+				resolve_title_and_vassal_change = scope:change
+			}
+			#Destroy all empires, kingdoms AND duchies. The latter will be redistributed soon.
+			every_held_title = {
+				limit = {
+					tier >= tier_duchy
+					OR = {
+						is_landless_type_title = no
+						has_game_rule = enabled_shattered_realms_landless
+					}
+				}
+				scope:i_ruler = { 
+					destroy_title = prev 
+					remove_claim = prev
+				}
+			}
+			#Make everyone a one-county count by giving out excess counties to random noble courtiers. Failing that, give them out to random lowborns.
+			every_held_title = {
+				limit = { 
+					tier = tier_county
+					NOT = { this = scope:i_ruler.capital_county }
+				}
+				save_scope_as = i_title
+				de_jure_liege = { add_to_list = possible_problem_duchies }
+				scope:i_ruler = {
+					random_courtier_or_guest = {
+						limit = { 
+							is_landed = no 
+							NOR = { #leave and take your crappy hacked armies with you!
+								this = character:6878 #Hæsteinn
+								this = character:163111 #Ivar the Boneless
+								this = character:163112 #Halfdan
+								this = character:122 #Harald Godwineson
+								this = character:189029 #Kitti
+								this = character:3040 #Alp Arslan
+								this = character:248748 #Hummay
+								this = character:140 #William
+								this = character:102531  #Harald Hardrada
+							}
+						}
+						weight = {
+							base = 1
+							#Additive
+							modifier = { #Prefer existing nobles
+								has_dynasty = yes
+								add = 5
+							}
+							modifier = { #Prefer characters that are not spouses, consort, or close relatives of the ruler.
+								NOT = { is_spouse_of = scope:i_ruler }
+								NOT = { is_consort_of = scope:i_ruler }
+								NOT = { is_close_or_extended_family_of = scope:i_ruler }
+								add = 4
+							}
+							modifier = { #Prefer different dynasties
+								exists = dynasty
+								NOT = { dynasty = scope:i_ruler.dynasty }
+								add = 4
+							}
+							#Prefer that this character doesn't stand to inherit titles
+							modifier = {
+								NOT = {
+									any_heir_title = {
+										place_in_line_of_succession = {
+											value <= 1
+										}
+									}
+									add = 3
+								}
+							}
+							modifier = {
+								NOT = {
+									any_heir_title = {
+										place_in_line_of_succession = {
+											value <= 3
+										}
+									}
+									add = 3
+								}
+							}
+							#Prefer same faith
+							modifier = {
+								faith = scope:i_ruler.faith
+								add = 3
+							}
+							#Prefer males/females according to game rules and faith
+							modifier = {
+								NOT = { has_game_rule = full_gender_equality }
+								NOT = { faith = { has_doctrine = doctrine_gender_equal } }
+								OR = {
+									AND = {
+										is_male = yes
+										faith = { has_doctrine = doctrine_gender_male_dominated }
+									}
+									AND = {
+										is_female = yes
+										faith = { has_doctrine = doctrine_gender_female_dominated }
+									}
+								}
+								add = 5
+							}
+						}
+						save_scope_as = lucky_new_ruler
+						scope:i_ruler = {
+							create_title_and_vassal_change = change
+							scope:change = {
+								set_title_and_vassal_change_type = created
+							}
+							scope:i_title = {
+								change_title_holder = {
+									holder = scope:lucky_new_ruler
+									change = scope:change
+								}
+							}
+							resolve_title_and_vassal_change = scope:change
+							remove_claim = scope:i_title
+						}
+						#Remove any claims
+						scope:lucky_new_ruler = {
+							every_claim = {
+								scope:lucky_new_ruler = { remove_claim = prev }
+							}
+						}
+					}
+				}
+			}
+			#Remove extra claims - this is not working...
+			every_claim = {
+				scope:i_ruler = { remove_claim = prev }
+			}
+		}
+		#Dukes
+		if = {
+			limit = { NOT = { has_game_rule = count_shattered_realms } }
+			
+			#To ensure newly created rulers are caught too...
+			every_ruler = {
+				add_to_list = shattered_count_list
+			}
+			#Now duchies are granted somewhat randomly - preferring pre-existing dukes. Doesn't catch all counts... what *is* the list size limit?
+			ordered_in_list = {
+				list = shattered_count_list
+				max = 99999 #actual limit is much lower than this, but looks greater than 8 bit.
+				check_range_bounds = no #needed?
+				
+				order_by = {
+					value = 1
+					#Add more params here later
+					if = {
+						limit = { has_character_flag = preferred_duke }
+						add = 100
+					}
+					#Prefer OPM Pope
+					if = {
+						limit = { any_held_title = { is_landless_type_title = yes } }
+						add = -100
+					}
+				}
+				save_scope_as = i_ruler
+				if = {
+					limit = { 
+						any_realm_de_jure_duchy = {
+							NOT = { exists = holder }
+						}
+					}
+					every_realm_de_jure_duchy = { #THERE SHOULD ONLY BE ONLY ONE
+						save_scope_as = i_title
+					}
+					create_title_and_vassal_change = change
+					scope:change = {
+						set_title_and_vassal_change_type = created
+					}
+					scope:i_title = {
+						change_title_holder = {
+							holder = scope:i_ruler
+							change = scope:change
+						}
+					}
+					resolve_title_and_vassal_change = scope:change
+				}
+			}
+			#De-jure vassalize everyone
+			every_ruler = {
+				limit = { highest_held_title_tier >= tier_duchy }
+				save_scope_as = i_ruler
+				primary_title = {
+					every_dejure_vassal_title_holder = {
+						limit = { highest_held_title_tier = tier_county }
+						create_title_and_vassal_change = change
+						change_liege = {
+							liege = scope:i_ruler
+							change = scope:change
+						}
+						resolve_title_and_vassal_change = scope:change
+					}
+				}
+			}
+			###WORKAROUND FOR UNRECOGNIZED INDIE RULERS###
+			mgr_indie_workaround = yes
+		}
+
+		#Kings
+		if = {
+			limit = { 
+				OR = {
+					has_game_rule = king_shattered_realms 
+					has_game_rule = emperor_shattered_realms
+				}
+			}
+			
+			every_ruler = {
+				limit = { highest_held_title_tier = tier_duchy }
+				add_to_list = shattered_duke_list
+			}
+			#Now duchies are granted somewhat randomly - preferring pre-existing dukes
+			ordered_in_list = {
+				list = shattered_duke_list
+				max = 99999 #Is there a default limit?
+				check_range_bounds = no #needed?
+				
+				order_by = {
+					value = 1
+					#Add more params here later
+					if = {
+						limit = { has_character_flag = preferred_king }
+						add = 100
+					}
+					#Prefer OPM Pope
+					if = {
+						limit = { any_held_title = { is_landless_type_title = yes } }
+						add = -100
+					}
+				}
+				save_scope_as = i_ruler
+				if = {
+					limit = { 
+						any_realm_de_jure_kingdom = {
+							NOT = { exists = holder }
+						}
+					}
+					every_realm_de_jure_kingdom = { #THERE SHOULD ONLY BE ONLY ONE
+						save_scope_as = i_title
+					}
+					create_title_and_vassal_change = change
+					scope:change = {
+						set_title_and_vassal_change_type = created
+					}
+					scope:i_title = {
+						change_title_holder = {
+							holder = scope:i_ruler
+							change = scope:change
+						}
+					}
+					resolve_title_and_vassal_change = scope:change
+				}
+			}
+			#De-jure vassalize everyone
+			every_ruler = {
+				limit = { highest_held_title_tier >= tier_kingdom }
+				save_scope_as = i_ruler
+				primary_title = {
+					every_dejure_vassal_title_holder = {
+						limit = { 
+							is_independent_ruler = yes
+						}
+						create_title_and_vassal_change = change
+						change_liege = {
+							liege = scope:i_ruler
+							change = scope:change
+						}
+						resolve_title_and_vassal_change = scope:change
+					}
+				}
+			}
+		}
+		#Emperors...
+		if = {
+			limit = { has_game_rule = emperor_shattered_realms }
+			
+			#To ensure newly created rulers are caught too...
+			every_ruler = {
+				limit = { highest_held_title_tier = tier_kingdom }
+				add_to_list = shattered_king_list
+			}
+			#Now duchies are granted somewhat randomly - preferring pre-existing dukes
+			ordered_in_list = {
+				list = shattered_king_list
+				max = 1000 #Not many are needed
+				check_range_bounds = no #needed?
+				
+				order_by = {
+					value = 1
+					#Add more params here later
+					if = {
+						limit = { has_character_flag = preferred_emperor }
+						add = 100
+					}
+					#Prefer OPM Pope
+					if = {
+						limit = { any_held_title = { is_landless_type_title = yes } }
+						add = -100
+					}
+				}
+				save_scope_as = i_ruler
+				if = {
+					limit = { 
+						any_realm_de_jure_empire = {
+							NOT = { exists = holder }
+						}
+					}
+					every_realm_de_jure_empire = { #THERE SHOULD ONLY BE ONLY ONE
+						save_scope_as = i_title
+					}
+					create_title_and_vassal_change = change
+					scope:change = {
+						set_title_and_vassal_change_type = created
+					}
+					scope:i_title = {
+						change_title_holder = {
+							holder = scope:i_ruler
+							change = scope:change
+						}
+					}
+					resolve_title_and_vassal_change = scope:change
+				}
+			}
+			#De-jure vassalize everyone
+			every_ruler = {
+				limit = { highest_held_title_tier = tier_empire }
+				save_scope_as = i_ruler
+				primary_title = {
+					every_dejure_vassal_title_holder = {
+						limit = { 
+							is_independent_ruler = yes
+						}
+						create_title_and_vassal_change = change
+						change_liege = {
+							liege = scope:i_ruler
+							change = scope:change
+						}
+						resolve_title_and_vassal_change = scope:change
+					}
+				}
+			}
+		}			
+	}
+}
+
+#################
+# RANDOM REALMS #
+#################
+
+#Government & Holdings
+feudalize_domain = {
+	every_held_title = {
+		limit = {
+			title_province = { 
+				OR = {
+					has_holding_type = tribal_holding 
+					#If a province only has a temple or city holding and is a capital barony, it is fair game too
+					AND = {
+						NOR = {
+							has_holding_type = castle_holding 
+							has_holding_type = tribal_holding 
+						}
+						prev = { is_capital_barony = yes }
+					}
+				}
+			}
+		}
+		title_province = { set_holding_type = castle_holding }
+	}
+	if = {
+		limit = { 
+			NOR = { 
+				has_government = feudal_government 
+				has_government = clan_government
+			} 
+		}
+		if = {
+			limit = { faith = { religion_tag = islam_religion } }
+			change_government = clan_government
+		}
+		else = { change_government = feudal_government }
+	}
+}
+
+tribalize_domain = {
+	every_held_title = {
+		limit = {
+			title_province = { 
+				OR = {
+					has_holding_type = castle_holding 
+					#If a province only has a temple or city holding and is a capital barony, it is fair game too
+					AND = {
+						NOR = {
+							has_holding_type = castle_holding 
+							has_holding_type = tribal_holding 
+						}
+						prev = { is_capital_barony = yes }
+					}
+				}
+			}
+		}
+		title_province = { set_holding_type = tribal_holding }
+	}
+	if = {
+		limit = { 
+			NOT = { has_government = tribal_government }
+		}
+		change_government = tribal_government	
+	}
+}
+
+randomize_government_and_holdings_effect = {
+	#Effect is used on top liege, affects vassals accordingly
+	random_list = {
+		50 = {
+			#Feudal
+			trigger = { 
+				OR = {
+					has_game_rule = random_ft_starting_governments 
+					has_game_rule = feudal_starting_governments
+				}
+			}
+			feudalize_domain = yes
+			every_vassal_or_below = {
+				if = { 
+					limit = { 
+						#We do not want to change holdings or change gov't for republic/theocracy barons...
+						OR = {
+							highest_held_title_tier >= tier_county
+							has_government = feudal_government
+							has_government = clan_government
+							has_government = tribal_government
+						}
+					}
+					feudalize_domain = yes
+				}
+			}
+		}
+		50 = {
+			#Tribal
+			trigger = { 
+				OR = {
+					has_game_rule = random_ft_starting_governments 
+					has_game_rule = tribal_starting_governments
+				}
+			}
+			tribalize_domain = yes
+			every_vassal_or_below = {
+				if = { 
+					limit = { 
+						#We do not want to change holdings or change gov't for republic/theocracy barons...
+						OR = {
+							highest_held_title_tier >= tier_county
+							has_government = feudal_government
+							has_government = clan_government
+							has_government = tribal_government
+						}
+					}
+					tribalize_domain = yes
+				}
+			}
+		}
+	}
+	#TO DO: Republics & Theocracies for full random govt's
+}
+
+#Random Realms - create new de jure borders
+

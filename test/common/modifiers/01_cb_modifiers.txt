@@ -1,0 +1,32 @@
+mgr_recent_holy_war = {
+	icon = piety_negative
+}
+
+mgr_recent_conquest_war = {
+	icon = prestige_negative
+}
+
+mgr_vlow_aggro = { #Probably prevents war in most of the world...
+	ai_war_chance = -0.5
+	ai_war_cooldown = 0.5
+}
+
+mgr_low_aggro = { #Effectively makes every faith 'pacifist'
+	ai_war_chance = -0.25
+	ai_war_cooldown = 0.25
+}
+
+mgr_high_aggro = {
+	ai_war_chance = 0.25
+	ai_war_cooldown = -0.25
+}
+
+mgr_vhigh_aggro = {
+	ai_war_chance = 0.5
+	ai_war_cooldown = -0.5
+}
+
+mgr_extreme_aggro = {
+	ai_war_chance = 1.0
+	ai_war_cooldown = -1.0
+}
