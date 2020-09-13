@@ -1,0 +1,43 @@
+greatest_of_khans = {
+	index = 247
+	diplomacy = 2
+	martial = 4
+	stewardship = 3
+	prowess = 8
+
+	knight_limit = 10
+	knight_effectiveness_mult = 0.5
+	same_culture_opinion = 10
+	vassal_limit = 20
+	dread_baseline_add = 50
+	dread_decay_mult = -0.5
+	hostile_scheme_resistance_mult = 0.25
+	enemy_hostile_scheme_success_chance_add = -25
+	movement_speed = 0.50
+	county_opinion_add = 50
+	ignore_negative_culture_opinion = yes
+	monthly_county_control_change_factor = 1
+	monthly_county_control_change_add = 0.5
+	monthly_lifestyle_xp_gain_mult = 1
+	supply_duration = 10
+	stress_gain_mult = -0.5
+	stress_loss_mult = 0.5
+	attrition_mult = -0.5
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_greatest_of_khans_desc
+			}
+			desc = trait_greatest_of_khans_character_desc
+		}
+	}
+	ai_war_chance = 1
+	ai_war_cooldown = -0.75
+	ai_honor = 20
+	ai_energy = 40
+	ai_boldness = 20
+}
