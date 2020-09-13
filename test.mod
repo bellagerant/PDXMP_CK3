@@ -5,4 +5,4 @@ tags={
 }
 name="test"
 supported_version="1.0.3"
-path="C:/Users/justi/Documents/Paradox Interactive/Crusader Kings III/mod/test"
+path="%USERPROFILE%/Documents/Paradox Interactive/Crusader Kings III/mod/test"
