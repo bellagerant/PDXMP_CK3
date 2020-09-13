@@ -13,3 +13,5 @@
 -Increase penalty on trying to seduce family
 
 -Increased embark time (30 to 150) to avoid ai boat bombing. Disembark remains the same (10)
+
+-Made the Mongols spawn stronger so they actually do something rather than fizzle out as they do in vanilla (from https://steamcommunity.com/sharedfiles/filedetails/?id=2225586840)
